@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sounding"
+version = "0.1.0"
+description = "Analyze one AI agent session with your own questions: inspect_scout single-transcript scanning plus Jev per-item judging."
+license = "MIT"
+requires-python = ">=3.11"
+dependencies = [
+    "anyio>=4",
+    "jinja2>=3",
+    "jsonschema>=4",
+    "pydantic>=2.11",
+    "tiktoken>=0.7",
+    "typing_extensions>=4.9",
+]
+
+[project.scripts]
+sounding = "sounding.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sounding"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# 与 inspect_scout 相同，摘取的文件不用为风格改动（便于对照上游）。
+[tool.ruff.lint]
+select = ["E", "W", "F", "D", "I", "B", "SIM101", "PLE", "PLW"]
+ignore = ["E203", "E501", "D10", "D212", "D415", "PLW0127", "PLW0603", "PLW2901"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

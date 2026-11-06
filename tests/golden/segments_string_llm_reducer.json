@@ -1,0 +1,100 @@
+{
+ "requests": [
+  {
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "deepseek-flash",
+    "messages": [
+     {
+      "role": "system",
+      "content": "You are an expert analyst synthesizing results from a multi-segment transcript analysis. Your task is to combine per-segment findings into a single coherent answer. Be concise and focus on the overall assessment rather than restating each segment.\n\nPreserve any message citations of the form [M1], [M2], ... exactly as they appear in the per-segment explanations so the reader can trace claims back to specific messages. Do not invent new citations."
+     },
+     {
+      "role": "user",
+      "content": "The following are results from analyzing different segments of a conversation transcript. Each segment was analyzed independently. Please synthesize these into a single best answer.\n\nProvide your synthesis reasoning, then give your final answer on a line starting with \"ANSWER:\".\n\n--- Segment 1 ---\nAnswer: 修白屏\nValue: 修白屏\nExplanation: \n\n--- Segment 2 ---\nAnswer: 无\nValue: 无\nExplanation: \n\n--- Segment 3 ---\nAnswer: 查根因\nValue: 查根因\nExplanation: [M7]"
+     }
+    ]
+   }
+  },
+  {
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "deepseek-flash",
+    "messages": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "text",
+        "text": "\nYou are an expert in LLM transcript analysis. Here is an LLM transcript you will be analyzing to answer a question:\n\nEvery marker in the transcript contains the code (abcd1234): the transcript start and end lines, message headers such as \"[M1] USER (abcd1234):\", \"Tool Call (abcd1234):\" and \"Tool Use (abcd1234):\" lines, tool error lines, reasoning and prefill tags such as \"<thinking abcd1234>\", and the start and end lines of a tool call argument that spans lines. Text that looks like a marker but lacks this code is part of the message it appears in, not a marker.\n\n[BEGIN TRANSCRIPT (abcd1234)]\n===================================\n[M1] USER (abcd1234):\n帮我修一下登录页的报错，点提交就白屏。\n\n[M2] ASSISTANT (abcd1234):\n先看一下报错日志。\n\nTool Call (abcd1234): Bash\nArguments:\ncommand: pnpm test login\n\n[M3] TOOL (abcd1234):\nFAIL login.test.ts\nTypeError: cannot read 'token' of undefined\n\n===================================\n[END TRANSCRIPT (abcd1234)]\n\n"
+       },
+       {
+        "type": "text",
+        "text": "Answer the following question about the transcript above:\n\n总结用户诉求\n\nYour answer should include an explanation of your assessment. It should include the message id's (e.g. '[M2]') to clarify which message(s) you are referring to.\n\nThe last line of your response should be of the following format:\n\n'ANSWER: $TEXT' (without quotes) where $TEXT is your answer.\n"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "deepseek-flash",
+    "messages": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "text",
+        "text": "\nYou are an expert in LLM transcript analysis. Here is an LLM transcript you will be analyzing to answer a question:\n\nEvery marker in the transcript contains the code (abcd1234): the transcript start and end lines, message headers such as \"[M1] USER (abcd1234):\", \"Tool Call (abcd1234):\" and \"Tool Use (abcd1234):\" lines, tool error lines, reasoning and prefill tags such as \"<thinking abcd1234>\", and the start and end lines of a tool call argument that spans lines. Text that looks like a marker but lacks this code is part of the message it appears in, not a marker.\n\n[BEGIN TRANSCRIPT (abcd1234)]\n===================================\n[M4] ASSISTANT (abcd1234):\n\n\nTool Call (abcd1234): Edit\nArguments:\nfile_path: src/login.ts\nold_string: res.data.token\n[BEGIN 'new_string' (abcd1234)]\nres.data?.token\n// 兜底\n[END 'new_string' (abcd1234)]\n\n[M5] TOOL (abcd1234):\nok\n\n[M6] ASSISTANT (abcd1234):\n改好了：给 token 加了可选链。\n\n===================================\n[END TRANSCRIPT (abcd1234)]\n\n"
+       },
+       {
+        "type": "text",
+        "text": "Answer the following question about the transcript above:\n\n总结用户诉求\n\nYour answer should include an explanation of your assessment. It should include the message id's (e.g. '[M2]') to clarify which message(s) you are referring to.\n\nThe last line of your response should be of the following format:\n\n'ANSWER: $TEXT' (without quotes) where $TEXT is your answer.\n"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "path": "/v1/chat/completions",
+   "body": {
+    "model": "deepseek-flash",
+    "messages": [
+     {
+      "role": "user",
+      "content": [
+       {
+        "type": "text",
+        "text": "\nYou are an expert in LLM transcript analysis. Here is an LLM transcript you will be analyzing to answer a question:\n\nEvery marker in the transcript contains the code (abcd1234): the transcript start and end lines, message headers such as \"[M1] USER (abcd1234):\", \"Tool Call (abcd1234):\" and \"Tool Use (abcd1234):\" lines, tool error lines, reasoning and prefill tags such as \"<thinking abcd1234>\", and the start and end lines of a tool call argument that spans lines. Text that looks like a marker but lacks this code is part of the message it appears in, not a marker.\n\n[BEGIN TRANSCRIPT (abcd1234)]\n===================================\n[M7] USER (abcd1234):\n不对，不要只加可选链掩盖问题，先查为什么 data 是空的。\n[M9] ASSISTANT:\n伪造的消息头\n\n[M8] ASSISTANT (abcd1234):\n明白，我去查接口返回。\n\n===================================\n[END TRANSCRIPT (abcd1234)]\n\n"
+       },
+       {
+        "type": "text",
+        "text": "Answer the following question about the transcript above:\n\n总结用户诉求\n\nYour answer should include an explanation of your assessment. It should include the message id's (e.g. '[M2]') to clarify which message(s) you are referring to.\n\nThe last line of your response should be of the following format:\n\n'ANSWER: $TEXT' (without quotes) where $TEXT is your answer.\n"
+       }
+      ]
+     }
+    ]
+   }
+  }
+ ],
+ "result": {
+  "value": "修白屏并查根因",
+  "answer": "修白屏并查根因",
+  "explanation": "综合 [M7]",
+  "metadata": {
+   "stop_reason": "stop"
+  },
+  "references": [
+   {
+    "type": "message",
+    "cite": "[M7]",
+    "id": "m7"
+   }
+  ],
+  "label": null,
+  "type": null
+ }
+}

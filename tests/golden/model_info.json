@@ -1,0 +1,16 @@
+{
+ "deepseek-flash": 1048576,
+ "deepseek-v4-pro": 1048576,
+ "deepseek-v4-flash-0731": 1048576,
+ "gpt-4o": 128000,
+ "gpt-5.5": 922000,
+ "claude-opus-4-8": 1000000,
+ "claude-sonnet-4-5-20250929": 200000,
+ "kimi-k3": 1048576,
+ "qwen3.8-flash": 1000000,
+ "glm-5.3": 1048576,
+ "Qwen/Qwen3-235B-A22B": 40960,
+ "gemini-2.5-pro": 1048576,
+ "grok-4.5": 500000,
+ "no-such-model-xyz": null
+}
